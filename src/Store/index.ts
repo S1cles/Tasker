@@ -2,12 +2,13 @@ import uuid from "react-uuid";
 import zustand from "zustand";
 import create from 'zustand';
 import { TaskStore } from "../Types/Task";
-export const useTaskStore = create<TaskStore>((set,get)=>({
-    tasks: [{
-        id:'sadasdas',
-        title:'default',
-        createdTime:12312321
-    }],
+import {isTaskStore} from '../middlewares/LocalStorageMidd'
+import {localStorageUpdate} from '../middlewares/LocalStorageMidd'
+
+const currentState = (JSON.parse(window.localStorage.getItem('tasks') || '[]'))
+
+export const useTaskStore = create<TaskStore>(localStorageUpdate((set,get)=>({
+    tasks: currentState,
     createTask: (title)=>{
         const {tasks} = get()
         const newTask ={
@@ -39,4 +40,4 @@ export const useTaskStore = create<TaskStore>((set,get)=>({
         })
     },
 
-}))
+})))

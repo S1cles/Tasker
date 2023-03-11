@@ -20,6 +20,7 @@ import { ColorModeSwitcher } from "./ColorModeSwitcher";
 import { useTaskStore } from "./Store/index";
 import uuid from "react-uuid";
 import TaskList from "./Components/TaskList";
+import { extendTheme } from "@chakra-ui/react"
 
 const inputStyle = {
   caretColor: "transparent",
@@ -39,13 +40,6 @@ const App: React.FC = () => {
     state.removeTask,
   ]);
 
-  React.useEffect(() => {
-    createTask("123123");
-
-    return () => {
-      console.log(tasks);
-    };
-  }, []);
 
   const taskInput = useRef<HTMLInputElement>(null);
 
@@ -56,6 +50,9 @@ const App: React.FC = () => {
       taskInput.current.value = "";
     }
   };
+
+
+
 
   return (
     <ChakraProvider theme={theme}>
@@ -128,18 +125,19 @@ const App: React.FC = () => {
             borderRadius={20}
           >
             <AccordionButton>
-              <Box as="span" flex="1" textAlign="left">
-                Completed
+              <Box as="span" flex="1" textAlign="center">
+               <b>Your tasks</b> 
               </Box>
               <AccordionIcon />
             </AccordionButton>
 
             <AccordionPanel pb={4}>
-              <List textAlign={"left"} spacing={3}>
+              <List textAlign={"left"} spacing={3}padding={'.5rem'}>
                 <>
                   {!tasks.length && <div>No tasks for today</div>}
                   {tasks.map((task) => (
                     <TaskList
+
                       key={task.id}
                       id={task.id}
                       title={task.title}
