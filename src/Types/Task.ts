@@ -8,4 +8,5 @@ export interface TaskStore{
     createTask: (title:string)=>void;
     updateTask:(id:string , title:string)=>void;
     removeTask:(id:string)=>void;
+    resetTasks:() => void;
 }

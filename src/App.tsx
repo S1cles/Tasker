@@ -33,11 +33,12 @@ const inputStyle = {
 const App: React.FC = () => {
   // console.log(useTaskStore)
 
-  const [tasks, createTask, updateTask, removeTask] = useTaskStore((state) => [
+  const [tasks, createTask, updateTask, removeTask, resetTasks] = useTaskStore((state) => [
     state.tasks,
     state.createTask,
     state.updateTask,
     state.removeTask,
+    state.resetTasks,
   ]);
 
 
@@ -96,7 +97,7 @@ const App: React.FC = () => {
             margin={0}
             color={"#46C8C1"}
             m={2}
-            onClick={() => console.log(tasks)}
+            onClick={() => resetTasks()}
           >
             Delete all
           </Button>

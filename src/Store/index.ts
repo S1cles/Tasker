@@ -39,5 +39,11 @@ export const useTaskStore = create<TaskStore>(localStorageUpdate((set,get)=>({
             )
         })
     },
+    resetTasks:()=>{
+        const {tasks} = get()
+        set({
+            tasks:[]
+        })
+    }
 
 })))
